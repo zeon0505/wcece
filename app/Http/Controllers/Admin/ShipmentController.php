@@ -277,20 +277,17 @@ class ShipmentController extends Controller
             'photo_box_uploaded_at' => now(),
         ]);
 
-        // Send email notification to each unique customer in this shipment
-        $shipment->load('resis.user');
+        // Send email notification to all registered users
+        $allUsers = \App\Models\User::whereNotNull('email')->where('email', '!=', '')->get();
         $notifiedEmails = [];
 
-        foreach ($shipment->resis as $resi) {
-            $email = $resi->user?->email;
-            if ($email && !in_array($email, $notifiedEmails)) {
-                $notifiedEmails[] = $email;
-                try {
-                    \Illuminate\Support\Facades\Mail::to($email)
-                        ->send(new \App\Mail\BoxPhotoNotificationMail($shipment, $resi->user));
-                } catch (\Throwable $e) {
-                    \Illuminate\Support\Facades\Log::error('BoxPhoto mail failed for ' . $email . ': ' . $e->getMessage());
-                }
+        foreach ($allUsers as $user) {
+            $notifiedEmails[] = $user->email;
+            try {
+                \Illuminate\Support\Facades\Mail::to($user->email)
+                    ->send(new \App\Mail\BoxPhotoNotificationMail($shipment, $user));
+            } catch (\Throwable $e) {
+                \Illuminate\Support\Facades\Log::error('BoxPhoto mail failed for ' . $user->email . ': ' . $e->getMessage());
             }
         }
 

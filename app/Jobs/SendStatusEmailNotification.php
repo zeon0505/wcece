@@ -4,8 +4,10 @@ namespace App\Jobs;
 
 use App\Mail\ResiStatusUpdatedMail;
 use App\Models\Resi;
+use App\Models\User;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Queue\Queueable;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 
 class SendStatusEmailNotification implements ShouldQueue
@@ -18,10 +20,19 @@ class SendStatusEmailNotification implements ShouldQueue
     {
         $resi = Resi::with(['user', 'statusHistories'])->find($this->resiId);
 
-        if (! $resi || ! $resi->user) {
+        if (! $resi) {
             return;
         }
 
-        Mail::to($resi->user->email)->send(new ResiStatusUpdatedMail($resi));
+        // Send notification to resi owner (if exists) and all registered users
+        $emails = User::whereNotNull('email')->where('email', '!=', '')->pluck('email')->unique();
+
+        foreach ($emails as $email) {
+            try {
+                Mail::to($email)->send(new ResiStatusUpdatedMail($resi));
+            } catch (\Throwable $e) {
+                Log::error("Failed to send status notification email to {$email}: " . $e->getMessage());
+            }
+        }
     }
 }
