@@ -75,13 +75,24 @@ class SettingsController extends Controller
                     'updated_at' => now(),
                 ]);
             } else {
-                DB::table('settings')->insert([
-                    'id' => (string) \Illuminate\Support\Str::uuid(),
-                    'key' => $key,
-                    'value' => $value,
-                    'created_at' => now(),
-                    'updated_at' => now(),
-                ]);
+                try {
+                    // Try inserting with UUID (untuk schema lokal/baru)
+                    DB::table('settings')->insert([
+                        'id' => (string) \Illuminate\Support\Str::uuid(),
+                        'key' => $key,
+                        'value' => $value,
+                        'created_at' => now(),
+                        'updated_at' => now(),
+                    ]);
+                } catch (\Illuminate\Database\QueryException $e) {
+                    // Fallback: Jika ID adalah integer auto-increment (server cPanel/schema lama)
+                    DB::table('settings')->insert([
+                        'key' => $key,
+                        'value' => $value,
+                        'created_at' => now(),
+                        'updated_at' => now(),
+                    ]);
+                }
             }
         }
 
