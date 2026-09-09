@@ -76,8 +76,14 @@ class ShipmentController extends Controller
 
         $resiCount = 0;
         if ($request->has('resi_ids') && is_array($request->resi_ids) && count($request->resi_ids) > 0) {
-            $resiCount = count($request->resi_ids);
-            Resi::whereIn('id', $request->resi_ids)->each(function (Resi $resi) use ($shipment, $admin, $newStatus): void {
+            // Filter out unclaimed resi (user_id = null) — must be claimed by a customer first
+            $validResiIds = Resi::whereIn('id', $request->resi_ids)
+                ->whereNotNull('user_id')
+                ->pluck('id')
+                ->toArray();
+
+            $resiCount = count($validResiIds);
+            Resi::whereIn('id', $validResiIds)->each(function (Resi $resi) use ($shipment, $admin, $newStatus): void {
                 $resi->update(['master_shipment_id' => $shipment->id]);
                 if ($resi->status !== $newStatus) {
                     $resi->transitionTo($newStatus, $admin->id);

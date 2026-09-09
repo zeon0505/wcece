@@ -51,14 +51,42 @@
                         </thead>
                         <tbody>
                             @foreach($availableResis as $resi)
-                                <tr class="resi-item" data-type="{{ $resi->shipment_type }}" style="border-bottom:1px solid var(--line); transition:background 0.1s;" onmouseover="this.style.background='rgba(0,0,0,0.025)'" onmouseout="this.style.background='transparent'">
+                                @php $isUnclaimed = is_null($resi->user_id); @endphp
+                                @if($isUnclaimed)
+                                    <tr class="resi-item resi-unclaimed" data-type="{{ $resi->shipment_type }}" style="border-bottom:1px solid var(--line); opacity:0.6;">
+                                @else
+                                    <tr class="resi-item" data-type="{{ $resi->shipment_type }}" style="border-bottom:1px solid var(--line); transition:background 0.1s;" onmouseover="this.style.background='rgba(0,0,0,0.025)'" onmouseout="this.style.background='transparent'">
+                                @endif
                                     <td style="padding:0.875rem 1.25rem;">
-                                        <input type="checkbox" name="resi_ids[]" value="{{ $resi->id }}" style="width:16px; height:16px; accent-color:#4f46e5; cursor:pointer;" class="resi-checkbox">
+                                        @if($isUnclaimed)
+                                            <input type="checkbox" name="resi_ids[]" value="{{ $resi->id }}" style="width:16px; height:16px; accent-color:#4f46e5; cursor:not-allowed;" class="resi-checkbox" disabled>
+                                        @else
+                                            <input type="checkbox" name="resi_ids[]" value="{{ $resi->id }}" style="width:16px; height:16px; accent-color:#4f46e5; cursor:pointer;" class="resi-checkbox">
+                                        @endif
                                     </td>
-                                    <td style="padding:0.875rem 1.25rem; cursor:pointer;" onclick="const cb=this.parentElement.querySelector('.resi-checkbox'); cb.checked=!cb.checked; updateCount();">
+                                    @if($isUnclaimed)
+                                        <td style="padding:0.875rem 1.25rem;">
+                                    @else
+                                        <td style="padding:0.875rem 1.25rem; cursor:pointer;" onclick="const cb=this.parentElement.querySelector('.resi-checkbox'); cb.checked=!cb.checked; updateCount();">
+                                    @endif
                                         <div style="display:flex; align-items:center; gap:0.5rem;">
                                             <span style="font-family:'Space Mono',monospace; font-weight:700; font-size:0.85rem; color:var(--ink);">{{ $resi->resi_number }}</span>
-                                            <span style="font-size:0.6rem; font-weight:700; padding:2px 6px; border-radius:4px; background:{{ $resi->shipment_type === 'AIR' ? '#e0e7ff' : ($resi->shipment_type === 'HANDCARRY' ? '#fce7f3' : '#dcfce7') }}; color:{{ $resi->shipment_type === 'AIR' ? '#4338ca' : ($resi->shipment_type === 'HANDCARRY' ? '#be185d' : '#15803d') }};">{{ $resi->shipment_type }}</span>
+                                        @php
+                                            $typeBg = match($resi->shipment_type) {
+                                                'AIR' => '#e0e7ff',
+                                                'HANDCARRY' => '#fce7f3',
+                                                default => '#dcfce7',
+                                            };
+                                            $typeColor = match($resi->shipment_type) {
+                                                'AIR' => '#4338ca',
+                                                'HANDCARRY' => '#be185d',
+                                                default => '#15803d',
+                                            };
+                                        @endphp
+                                            <span style="font-size:0.6rem; font-weight:700; padding:2px 6px; border-radius:4px; background:{{ $typeBg }}; color:{{ $typeColor }};">{{ $resi->shipment_type }}</span>
+                                            @if($isUnclaimed)
+                                                <span style="font-size:0.6rem; font-weight:700; padding:2px 6px; border-radius:4px; background:#fef9c3; color:#a16207;">&#9888; Belum Diklaim</span>
+                                            @endif
                                         </div>
                                         <div style="font-size:0.75rem; color:var(--ink-soft); margin-top:0.2rem;">
                                             <span style="font-weight:600; color:var(--ink);">{{ $resi->customer_name_snapshot ?: ($resi->user?->name ?? '—') }}</span>
@@ -66,6 +94,9 @@
                                                 <span>&bull; {{ Str::limit($resi->item_name, 40) }}</span>
                                             @endif
                                         </div>
+                                        @if($isUnclaimed)
+                                            <div style="font-size:0.72rem; color:#b45309; margin-top:0.25rem; font-style:italic;">Tunggu klaim customer sebelum bisa dimasukkan ke box.</div>
+                                        @endif
                                     </td>
                                     <td style="padding:0.875rem 1.25rem;">
                                         @if($resi->status === 'arrived_wh_china')
@@ -162,8 +193,9 @@ function filterResis() {
 }
 function selectAll() {
     document.querySelectorAll('.resi-item').forEach(item => {
-        if (item.style.display !== 'none') {
-            item.querySelector('.resi-checkbox').checked = true;
+        if (item.style.display !== 'none' && !item.classList.contains('resi-unclaimed')) {
+            const cb = item.querySelector('.resi-checkbox');
+            if (cb && !cb.disabled) cb.checked = true;
         }
     });
     updateCount();
