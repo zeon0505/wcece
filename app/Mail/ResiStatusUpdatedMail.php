@@ -11,7 +11,7 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class ResiStatusUpdatedMail extends Mailable implements ShouldQueue
+class ResiStatusUpdatedMail extends Mailable
 {
     use Queueable, SerializesModels;
 

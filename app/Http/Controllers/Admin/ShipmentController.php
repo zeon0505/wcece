@@ -260,7 +260,7 @@ class ShipmentController extends Controller
             ->with('success', count($request->resi_ids) . ' resi berhasil ditambahkan ke box.');
     }
 
-    public function uploadBoxPhoto(Request $request, MasterShipment $shipment): \Illuminate\Http\RedirectResponse
+    public function uploadBoxPhoto(Request $request, MasterShipment $shipment): RedirectResponse
     {
         $request->validate([
             'photo_box' => ['required', 'image', 'mimes:jpg,jpeg,png,webp', 'max:5120'],
