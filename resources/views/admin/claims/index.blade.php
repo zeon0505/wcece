@@ -76,13 +76,19 @@
                             <div style="display:flex; gap:0.5rem; justify-content:flex-end;">
                                 <a href="{{ route('admin.claims.show', $claim) }}" class="btn btn-outline btn-sm">Detail</a>
                                 @if($claim->status === 'pending')
-                                    <form method="POST" action="{{ route('admin.claims.approve', $claim) }}" onsubmit="return confirm('Setujui klaim ini?');">
+                                    <form id="cidx-approve-{{ $claim->id }}" method="POST" action="{{ route('admin.claims.approve', $claim) }}">
                                         @csrf
-                                        <button type="submit" class="btn btn-sm" style="background:#10b981; color:#fff;">Setujui</button>
+                                        <button type="button" class="btn btn-sm" style="background:#10b981; color:#fff;"
+                                            onclick="gConfirm({icon:'✅',iconBg:'#dcfce7',title:'Setujui Klaim?',body:'Resi akan masuk ke dashboard user.',btnText:'Ya, Setujui',btnColor:'#10b981',form:document.getElementById('cidx-approve-{{ $claim->id }}')})">
+                                            Setujui
+                                        </button>
                                     </form>
-                                    <form method="POST" action="{{ route('admin.claims.reject', $claim) }}" onsubmit="return confirm('Tolak klaim ini?');">
+                                    <form id="cidx-reject-{{ $claim->id }}" method="POST" action="{{ route('admin.claims.reject', $claim) }}">
                                         @csrf
-                                        <button type="submit" class="btn btn-sm btn-danger">Tolak</button>
+                                        <button type="button" class="btn btn-sm btn-danger"
+                                            onclick="gConfirm({icon:'❌',iconBg:'#fee2e2',title:'Tolak Klaim?',body:'Klaim ini akan ditolak permanen.',btnText:'Ya, Tolak',btnColor:'#dc2626',form:document.getElementById('cidx-reject-{{ $claim->id }}')})">
+                                            Tolak
+                                        </button>
                                     </form>
                                 @endif
                             </div>

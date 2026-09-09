@@ -5,7 +5,9 @@
 <style>
     .shipment-detail-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 1.5rem; align-items: start; }
     .header-box { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; margin-bottom: 1.5rem; }
-    
+    .inv-paid   { color: #16a34a; font-weight: 700; }
+    .inv-unpaid { color: #d97706; font-weight: 700; }
+
     @media (max-width: 850px) {
         .shipment-detail-grid { grid-template-columns: 1fr !important; }
     }
@@ -182,10 +184,13 @@
                         <div style="font-size:0.875rem; font-weight:600; color:var(--ink);">{{ $shipment->departed_at ? $shipment->departed_at->format('d M Y') : 'Belum Berangkat' }}</div>
                     </div>
                     @if($shipment->status === 'packing')
-                        <form method="POST" action="{{ route('admin.shipments.update_status', $shipment) }}" onsubmit="return confirm('Tandai box ini sudah berangkat (OTW)?')">
+                        <form id="ship-otw-{{ $shipment->id }}" method="POST" action="{{ route('admin.shipments.update_status', $shipment) }}">
                             @csrf
                             <input type="hidden" name="status" value="in_transit">
-                            <button class="btn" style="background:#eff6ff; color:#2563eb; border:1px solid #bfdbfe; font-size:0.75rem; padding:0.4rem 0.8rem; border-radius:6px; font-weight:600; cursor:pointer;">Set Berangkat</button>
+                            <button type="button" class="btn" style="background:#eff6ff; color:#2563eb; border:1px solid #bfdbfe; font-size:0.75rem; padding:0.4rem 0.8rem; border-radius:6px; font-weight:600; cursor:pointer;"
+                                onclick="gConfirm({icon:'🚚',iconBg:'#eff6ff',title:'Tandai Berangkat?',body:'Box ini akan ditandai sebagai <strong>OTW Indonesia</strong>. Status tidak bisa dikembalikan.',btnText:'Ya, Berangkat',btnColor:'#2563eb',form:document.getElementById('ship-otw-{{ $shipment->id }}')})">
+                                Set Berangkat
+                            </button>
                         </form>
                     @endif
                 </div>
@@ -285,8 +290,8 @@
                             </div>
                             <div style="text-align:right;">
                                 <div style="font-size:0.8rem; font-weight:700;">Rp {{ number_format($inv->total_amount, 0, ',', '.') }}</div>
-                                @php $color = $inv->status === 'paid' ? '#16a34a' : '#d97706'; @endphp
-                                <div style="font-size:0.7rem; color:{{ $color }};">{{ strtoupper($inv->status) }}</div>
+                                @php $invStatusClass = $inv->status === 'paid' ? 'inv-paid' : 'inv-unpaid'; @endphp
+                                <div class="{{ $invStatusClass }}" style="font-size:0.7rem;">{{ strtoupper($inv->status) }}</div>
                             </div>
                         </div>
                     @endforeach

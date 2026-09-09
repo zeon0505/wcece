@@ -150,18 +150,18 @@
         @if($claim->status === 'pending')
         <div class="card">
             <div class="card-body" style="display:flex; gap:1rem;">
-                <form method="POST" action="{{ route('admin.claims.approve', $claim) }}" style="flex:1;"
-                    onsubmit="return confirm('Setujui klaim ini? Resi akan masuk ke dashboard user.');">
+                <form id="claim-approve-{{ $claim->id }}" method="POST" action="{{ route('admin.claims.approve', $claim) }}" style="flex:1;">
                     @csrf
-                    <button type="submit" class="btn" style="width:100%; justify-content:center; background:#10b981; color:#fff; border-color:#10b981; font-size:1rem; padding:0.75rem;">
+                    <button type="button" class="btn" style="width:100%; justify-content:center; background:#10b981; color:#fff; border-color:#10b981; font-size:1rem; padding:0.75rem;"
+                        onclick="gConfirm({icon:'✅',iconBg:'#dcfce7',title:'Setujui Klaim?',body:'Resi akan masuk ke dashboard user dan klaim ini selesai.',btnText:'Ya, Setujui',btnColor:'#10b981',form:document.getElementById('claim-approve-{{ $claim->id }}')})">
                         <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
                         Setujui Klaim
                     </button>
                 </form>
-                <form method="POST" action="{{ route('admin.claims.reject', $claim) }}" style="flex:1;"
-                    onsubmit="return confirm('Tolak klaim ini?');">
+                <form id="claim-reject-{{ $claim->id }}" method="POST" action="{{ route('admin.claims.reject', $claim) }}" style="flex:1;">
                     @csrf
-                    <button type="submit" class="btn btn-danger" style="width:100%; justify-content:center; font-size:1rem; padding:0.75rem;">
+                    <button type="button" class="btn btn-danger" style="width:100%; justify-content:center; font-size:1rem; padding:0.75rem;"
+                        onclick="gConfirm({icon:'❌',iconBg:'#fee2e2',title:'Tolak Klaim?',body:'Klaim ini akan ditolak. User perlu mengajukan klaim ulang.',btnText:'Ya, Tolak',btnColor:'#dc2626',form:document.getElementById('claim-reject-{{ $claim->id }}')})">
                         <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
                         Tolak Klaim
                     </button>
