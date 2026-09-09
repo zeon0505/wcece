@@ -4,7 +4,7 @@
 @section('content')
 <div class="page-header" style="display:flex; align-items:flex-start; justify-content:space-between; flex-wrap:wrap; gap:1rem; margin-bottom:2rem;">
     <div>
-        <h1 style="font-size:1.85rem; font-weight:800; background:linear-gradient(90deg, var(--ink), #4f46e5); -webkit-background-clip:text; -webkit-text-fill-color:transparent;">Halo, {{ auth()->user()->name }} 👋</h1>
+        <h1 style="font-size:1.85rem; font-weight:800; background:linear-gradient(90deg, var(--ink), #4f46e5); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;">Halo, {{ auth()->user()->name }} 👋</h1>
         <p style="margin-top:0.4rem; font-size:0.9rem; color:var(--ink-soft);">Pantau semua paket kiriman Anda dari China ke Indonesia.</p>
     </div>
 </div>
@@ -116,7 +116,7 @@
                     $isPaid = $invoice && $invoice->status === 'paid';
                     $isUnpaid = $invoice && in_array($invoice->status, ['unpaid', 'pending_verification']);
                 @endphp
-                <tr style="border-bottom:1px solid var(--line); transition:background 0.15s; cursor:pointer;" onclick="window.location='{{ route('resi.show', $resi) }}'" onmouseover="this.style.background='rgba(248,250,252,0.8)'" onmouseout="this.style.background='transparent'">
+                <tr class="resi-row" data-href="{{ route('resi.show', $resi) }}" style="border-bottom:1px solid var(--line); transition:background 0.15s; cursor:pointer;" onmouseover="this.style.background='rgba(248,250,252,0.8)'" onmouseout="this.style.background='transparent'">
                     {{-- Nama Barang --}}
                     <td style="padding:1rem 1.25rem;">
                         <div style="font-weight:700; color:var(--ink); max-width:200px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">{{ $resi->item_name ?: '—' }}</div>
@@ -249,4 +249,16 @@
         Buka Alamat WH &rarr;
     </a>
 </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        document.querySelectorAll('.resi-row').forEach(function(row) {
+            row.addEventListener('click', function() {
+                if (row.dataset.href) {
+                    window.location.href = row.dataset.href;
+                }
+            });
+        });
+    });
+</script>
 @endsection
