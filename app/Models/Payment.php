@@ -2,13 +2,11 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Model;
 
 class Payment extends Model
 {
-    use HasUuids;
-    protected $fillable = [
+        protected $fillable = [
         'invoice_id',
         'method',
         'gateway_reference',
@@ -37,3 +35,4 @@ class Payment extends Model
         return $this->belongsTo(User::class, 'verified_by');
     }
 }
+

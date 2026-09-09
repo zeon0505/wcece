@@ -3,14 +3,13 @@
 namespace App\Models;
 
 use App\Jobs\SendStatusEmailNotification;
-use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Resi extends Model
 {
     /** @use HasFactory<\Database\Factories\ResiFactory> */
-    use HasFactory, HasUuids;
+    use HasFactory;
 
     protected $fillable = [
         'user_id',
@@ -132,3 +131,4 @@ class Resi extends Model
         return $this->hasMany(StatusHistory::class)->orderBy('created_at');
     }
 }
+

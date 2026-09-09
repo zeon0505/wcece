@@ -2,14 +2,13 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class MasterShipment extends Model
 {
     /** @use HasFactory<\Database\Factories\MasterShipmentFactory> */
-    use HasFactory, HasUuids;
+    use HasFactory;
 
     protected $fillable = [
         'code',
@@ -82,3 +81,4 @@ class MasterShipment extends Model
         return $this->belongsTo(User::class, 'created_by');
     }
 }
+

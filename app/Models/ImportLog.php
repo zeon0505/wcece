@@ -2,13 +2,11 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Model;
 
 class ImportLog extends Model
 {
-    use HasUuids;
-    protected $fillable = [
+        protected $fillable = [
         'uploaded_by',
         'file_name',
         'total_rows',
@@ -35,3 +33,4 @@ class ImportLog extends Model
         return $this->belongsTo(User::class, 'uploaded_by');
     }
 }
+

@@ -2,13 +2,11 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Model;
 
 class StatusHistory extends Model
 {
-    use HasUuids;
-    protected $fillable = [
+        protected $fillable = [
         'resi_id',
         'from_status',
         'to_status',
@@ -44,3 +42,4 @@ class StatusHistory extends Model
         return $this->belongsTo(User::class, 'changed_by');
     }
 }
+
