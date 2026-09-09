@@ -7,6 +7,11 @@
     @media (max-width: 900px) {
         .create-grid { grid-template-columns: 1fr; }
     }
+    .type-badge { font-size:0.6rem; font-weight:700; padding:2px 6px; border-radius:4px; }
+    .type-badge-air { background:#e0e7ff; color:#4338ca; }
+    .type-badge-sea { background:#dcfce7; color:#15803d; }
+    .type-badge-handcarry { background:#fce7f3; color:#be185d; }
+    .badge-unclaimed { font-size:0.6rem; font-weight:700; padding:2px 6px; border-radius:4px; background:#fef9c3; color:#a16207; }
 </style>
 
 <div style="display:flex; align-items:center; gap:1rem; margin-bottom:1.5rem;">
@@ -72,20 +77,15 @@
                                         <div style="display:flex; align-items:center; gap:0.5rem;">
                                             <span style="font-family:'Space Mono',monospace; font-weight:700; font-size:0.85rem; color:var(--ink);">{{ $resi->resi_number }}</span>
                                         @php
-                                            $typeBg = match($resi->shipment_type) {
-                                                'AIR' => '#e0e7ff',
-                                                'HANDCARRY' => '#fce7f3',
-                                                default => '#dcfce7',
-                                            };
-                                            $typeColor = match($resi->shipment_type) {
-                                                'AIR' => '#4338ca',
-                                                'HANDCARRY' => '#be185d',
-                                                default => '#15803d',
+                                            $typeClass = match($resi->shipment_type) {
+                                                'AIR' => 'type-badge-air',
+                                                'HANDCARRY' => 'type-badge-handcarry',
+                                                default => 'type-badge-sea',
                                             };
                                         @endphp
-                                            <span style="font-size:0.6rem; font-weight:700; padding:2px 6px; border-radius:4px; background:{{ $typeBg }}; color:{{ $typeColor }};">{{ $resi->shipment_type }}</span>
+                                            <span class="type-badge {{ $typeClass }}">{{ $resi->shipment_type }}</span>
                                             @if($isUnclaimed)
-                                                <span style="font-size:0.6rem; font-weight:700; padding:2px 6px; border-radius:4px; background:#fef9c3; color:#a16207;">&#9888; Belum Diklaim</span>
+                                                <span class="badge-unclaimed">&#9888; Belum Diklaim</span>
                                             @endif
                                         </div>
                                         <div style="font-size:0.75rem; color:var(--ink-soft); margin-top:0.2rem;">
