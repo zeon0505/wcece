@@ -170,15 +170,17 @@ class ResiController extends Controller
         $field = $request->type === 'wh_china' ? 'photo_wh_china' : 'photo_arrived_id';
         $resi->update([$field => $filename]);
 
-        $emails = \App\Models\User::whereNotNull('email')->where('email', '!=', '')->pluck('email')->unique();
-        foreach ($emails as $email) {
-            try {
-                \Illuminate\Support\Facades\Mail::to($email)
-                    ->send(new \App\Mail\ResiStatusUpdatedMail($resi->fresh(), $request->type));
-            } catch (\Throwable $e) {
-                \Illuminate\Support\Facades\Log::error('Failed to send photo notification email to ' . $email . ': ' . $e->getMessage());
+        dispatch(function () use ($resi, $request) {
+            $emails = \App\Models\User::whereNotNull('email')->where('email', '!=', '')->pluck('email')->unique();
+            foreach ($emails as $email) {
+                try {
+                    \Illuminate\Support\Facades\Mail::to($email)
+                        ->send(new \App\Mail\ResiStatusUpdatedMail($resi->fresh(), $request->type));
+                } catch (\Throwable $e) {
+                    \Illuminate\Support\Facades\Log::error('Failed to send photo notification email to ' . $email . ': ' . $e->getMessage());
+                }
             }
-        }
+        })->afterResponse();
 
         return back()->with('success', 'Foto berhasil diupload dan notifikasi email telah dikirim.');
     }

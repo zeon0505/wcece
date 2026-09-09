@@ -277,21 +277,20 @@ class ShipmentController extends Controller
             'photo_box_uploaded_at' => now(),
         ]);
 
-        // Send email notification to all registered users
-        $allUsers = \App\Models\User::whereNotNull('email')->where('email', '!=', '')->get();
-        $notifiedEmails = [];
-
-        foreach ($allUsers as $user) {
-            $notifiedEmails[] = $user->email;
-            try {
-                \Illuminate\Support\Facades\Mail::to($user->email)
-                    ->send(new \App\Mail\BoxPhotoNotificationMail($shipment, $user));
-            } catch (\Throwable $e) {
-                \Illuminate\Support\Facades\Log::error('BoxPhoto mail failed for ' . $user->email . ': ' . $e->getMessage());
+        // Send email notification to all registered users asynchronously after HTTP response
+        dispatch(function () use ($shipment) {
+            $allUsers = \App\Models\User::whereNotNull('email')->where('email', '!=', '')->get();
+            foreach ($allUsers as $user) {
+                try {
+                    \Illuminate\Support\Facades\Mail::to($user->email)
+                        ->send(new \App\Mail\BoxPhotoNotificationMail($shipment, $user));
+                } catch (\Throwable $e) {
+                    \Illuminate\Support\Facades\Log::error('BoxPhoto mail failed for ' . $user->email . ': ' . $e->getMessage());
+                }
             }
-        }
+        })->afterResponse();
 
         return redirect()->route('admin.shipments.show', $shipment)
-            ->with('success', 'Foto box berhasil diupload dan notifikasi telah dikirim ke ' . count($notifiedEmails) . ' customer.');
+            ->with('success', 'Foto box berhasil diupload dan notifikasi email sedang dikirim ke seluruh customer.');
     }
 }
