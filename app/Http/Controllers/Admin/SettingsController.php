@@ -66,10 +66,23 @@ class SettingsController extends Controller
         ];
 
         foreach ($keys as $key) {
-            DB::table('settings')->updateOrInsert(
-                ['key' => $key],
-                ['value' => $request->input($key, ''), 'updated_at' => now(), 'created_at' => now()]
-            );
+            $value = $request->input($key, '');
+            $existing = DB::table('settings')->where('key', $key)->first();
+
+            if ($existing) {
+                DB::table('settings')->where('key', $key)->update([
+                    'value' => $value,
+                    'updated_at' => now(),
+                ]);
+            } else {
+                DB::table('settings')->insert([
+                    'id' => (string) \Illuminate\Support\Str::uuid(),
+                    'key' => $key,
+                    'value' => $value,
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                ]);
+            }
         }
 
         return redirect()->route('admin.settings.index')

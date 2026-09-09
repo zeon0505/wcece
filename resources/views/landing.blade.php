@@ -27,6 +27,7 @@
         .landing-nav { display: flex; gap: 2rem; align-items: center; }
         .landing-nav a { color: var(--ink); text-decoration: none; font-weight: 500; font-size: 0.9rem; transition: color 0.2s; }
         .landing-nav a:hover { color: var(--blue-deep); }
+        @media (max-width: 768px) { .landing-nav { display: none; } }
 
         .hero {
             min-height: 100vh; display: flex; align-items: center; justify-content: center;
@@ -154,15 +155,21 @@
 <body>
 
     <nav class="landing-navbar">
-        <a href="/" class="landing-brand">
+        <a href="{{ route('home') }}" class="landing-brand">
             <span style="width:12px;height:12px;background:var(--pink-deep);border-radius:50%;display:inline-block;"></span>
             WH CHINA by CECE
         </a>
         <div class="landing-nav">
-            <a href="#cara-kerja">Cara Kerja</a>
-            <a href="#harga">Harga & Info</a>
-            <a href="{{ route('login') }}" style="font-weight: 600;">Masuk</a>
-            <a href="{{ route('register') }}" style="background: var(--ink); color: var(--white); padding: 0.6rem 1.25rem; border-radius: 50px;">Daftar</a>
+            <a href="{{ request()->routeIs('home') ? '#cara-kerja' : route('home') . '#cara-kerja' }}">Cara Kerja</a>
+            <a href="{{ request()->routeIs('home') ? '#harga' : route('home') . '#harga' }}">Harga &amp; Info</a>
+            <a href="{{ route('tnc') }}" style="{{ request()->routeIs('tnc') ? 'color:var(--blue-deep); font-weight:700;' : '' }}">Syarat &amp; Ketentuan</a>
+            <a href="{{ route('privacy') }}" style="{{ request()->routeIs('privacy') ? 'color:var(--blue-deep); font-weight:700;' : '' }}">Kebijakan Privasi</a>
+            @auth
+                <a href="{{ route('dashboard') }}" style="background:var(--ink); color:var(--white); padding:0.6rem 1.25rem; border-radius:50px; font-weight:600; text-decoration:none;">Ke Dashboard</a>
+            @else
+                <a href="{{ route('login') }}" style="font-weight:600;">Masuk</a>
+                <a href="{{ route('register') }}" style="background:var(--ink); color:var(--white); padding:0.6rem 1.25rem; border-radius:50px; font-weight:600; text-decoration:none;">Daftar</a>
+            @endauth
         </div>
     </nav>
 
@@ -307,8 +314,11 @@
             <span style="width:10px;height:10px;background:var(--pink-deep);border-radius:50%;display:inline-block;"></span>
             WH CHINA by CECE
         </div>
-        <div>
-            &copy; {{ date('Y') }} WH CHINA by CECE. Hak Cipta Dilindungi.         </div>
+        <div style="display:flex; align-items:center; gap:1.5rem; flex-wrap:wrap; justify-content:center;">
+            <a href="{{ route('tnc') }}" style="color:var(--ink-soft); text-decoration:none; font-size:0.85rem; font-weight:600; transition:color 0.2s;" onmouseover="this.style.color='var(--ink)';" onmouseout="this.style.color='var(--ink-soft)';">Syarat &amp; Ketentuan</a>
+            <a href="{{ route('privacy') }}" style="color:var(--ink-soft); text-decoration:none; font-size:0.85rem; font-weight:600; transition:color 0.2s;" onmouseover="this.style.color='var(--ink)';" onmouseout="this.style.color='var(--ink-soft)';">Kebijakan Privasi</a>
+            <span style="color:var(--ink-soft); font-size:0.85rem;">&copy; {{ date('Y') }} WH CHINA by CECE. Hak Cipta Dilindungi.</span>
+        </div>
     </footer>
 
 </body>

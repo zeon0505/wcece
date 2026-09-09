@@ -38,7 +38,7 @@
                 <div style="background:#f8fafc; border:1px solid var(--line); border-radius:12px; padding:0.75rem 1rem;">
                     <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.2rem;">
                         <span style="font-size:0.7rem; font-weight:700; color:var(--ink-soft); text-transform:uppercase; letter-spacing:0.05em;">Nama Penerima (Name)</span>
-                        <button type="button" onclick="copyText('{{ addslashes($settings['wh_air_name']) }}', this)" style="background:none; border:none; color:#2563eb; font-size:0.75rem; font-weight:700; cursor:pointer;">📋 Salin</button>
+                        <button type="button" data-copy="{{ $settings['wh_air_name'] }}" onclick="copyText(this)" style="background:none; border:none; color:#2563eb; font-size:0.75rem; font-weight:700; cursor:pointer; padding:4px 8px; border-radius:6px; transition:background 0.2s;" onmouseover="this.style.background='rgba(37,99,235,0.08)';" onmouseout="this.style.background='none';">📋 Salin</button>
                     </div>
                     <div style="font-weight:800; color:var(--ink); font-size:0.95rem;">{{ $settings['wh_air_name'] }}</div>
                 </div>
@@ -47,7 +47,7 @@
                 <div style="background:#f8fafc; border:1px solid var(--line); border-radius:12px; padding:0.75rem 1rem;">
                     <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.2rem;">
                         <span style="font-size:0.7rem; font-weight:700; color:var(--ink-soft); text-transform:uppercase; letter-spacing:0.05em;">No Telepon (Phone)</span>
-                        <button type="button" onclick="copyText('{{ addslashes($settings['wh_air_phone']) }}', this)" style="background:none; border:none; color:#2563eb; font-size:0.75rem; font-weight:700; cursor:pointer;">📋 Salin</button>
+                        <button type="button" data-copy="{{ $settings['wh_air_phone'] }}" onclick="copyText(this)" style="background:none; border:none; color:#2563eb; font-size:0.75rem; font-weight:700; cursor:pointer; padding:4px 8px; border-radius:6px; transition:background 0.2s;" onmouseover="this.style.background='rgba(37,99,235,0.08)';" onmouseout="this.style.background='none';">📋 Salin</button>
                     </div>
                     <div style="font-weight:800; font-family:'Space Mono',monospace; color:var(--ink); font-size:0.95rem;">{{ $settings['wh_air_phone'] }}</div>
                 </div>
@@ -56,7 +56,7 @@
                 <div style="background:#f8fafc; border:1px solid var(--line); border-radius:12px; padding:0.75rem 1rem;">
                     <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.2rem;">
                         <span style="font-size:0.7rem; font-weight:700; color:var(--ink-soft); text-transform:uppercase; letter-spacing:0.05em;">Alamat Lengkap (Address)</span>
-                        <button type="button" onclick="copyText('{{ addslashes($settings['wh_air_address']) }}', this)" style="background:none; border:none; color:#2563eb; font-size:0.75rem; font-weight:700; cursor:pointer;">📋 Salin</button>
+                        <button type="button" data-copy="{{ $settings['wh_air_address'] }}" onclick="copyText(this)" style="background:none; border:none; color:#2563eb; font-size:0.75rem; font-weight:700; cursor:pointer; padding:4px 8px; border-radius:6px; transition:background 0.2s;" onmouseover="this.style.background='rgba(37,99,235,0.08)';" onmouseout="this.style.background='none';">📋 Salin</button>
                     </div>
                     <div style="font-weight:600; color:var(--ink); font-size:0.875rem; line-height:1.45; word-break:break-word;">{{ $settings['wh_air_address'] }}</div>
                 </div>
@@ -85,7 +85,7 @@
                 <div style="background:#f8fafc; border:1px solid var(--line); border-radius:12px; padding:0.75rem 1rem;">
                     <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.2rem;">
                         <span style="font-size:0.7rem; font-weight:700; color:var(--ink-soft); text-transform:uppercase; letter-spacing:0.05em;">Nama Penerima (Name)</span>
-                        <button type="button" onclick="copyText('{{ addslashes($settings['wh_sea_name']) }}', this)" style="background:none; border:none; color:#db2777; font-size:0.75rem; font-weight:700; cursor:pointer;">📋 Salin</button>
+                        <button type="button" data-copy="{{ $settings['wh_sea_name'] }}" onclick="copyText(this)" style="background:none; border:none; color:#db2777; font-size:0.75rem; font-weight:700; cursor:pointer; padding:4px 8px; border-radius:6px; transition:background 0.2s;" onmouseover="this.style.background='rgba(219,39,119,0.08)';" onmouseout="this.style.background='none';">📋 Salin</button>
                     </div>
                     <div style="font-weight:800; color:var(--ink); font-size:0.95rem;">{{ $settings['wh_sea_name'] }}</div>
                 </div>
@@ -94,7 +94,7 @@
                 <div style="background:#f8fafc; border:1px solid var(--line); border-radius:12px; padding:0.75rem 1rem;">
                     <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.2rem;">
                         <span style="font-size:0.7rem; font-weight:700; color:var(--ink-soft); text-transform:uppercase; letter-spacing:0.05em;">No Telepon (Phone)</span>
-                        <button type="button" onclick="copyText('{{ addslashes($settings['wh_sea_phone']) }}', this)" style="background:none; border:none; color:#db2777; font-size:0.75rem; font-weight:700; cursor:pointer;">📋 Salin</button>
+                        <button type="button" data-copy="{{ $settings['wh_sea_phone'] }}" onclick="copyText(this)" style="background:none; border:none; color:#db2777; font-size:0.75rem; font-weight:700; cursor:pointer; padding:4px 8px; border-radius:6px; transition:background 0.2s;" onmouseover="this.style.background='rgba(219,39,119,0.08)';" onmouseout="this.style.background='none';">📋 Salin</button>
                     </div>
                     <div style="font-weight:800; font-family:'Space Mono',monospace; color:var(--ink); font-size:0.95rem;">{{ $settings['wh_sea_phone'] }}</div>
                 </div>
@@ -103,7 +103,7 @@
                 <div style="background:#f8fafc; border:1px solid var(--line); border-radius:12px; padding:0.75rem 1rem;">
                     <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.2rem;">
                         <span style="font-size:0.7rem; font-weight:700; color:var(--ink-soft); text-transform:uppercase; letter-spacing:0.05em;">Alamat Lengkap (Address)</span>
-                        <button type="button" onclick="copyText('{{ addslashes($settings['wh_sea_address']) }}', this)" style="background:none; border:none; color:#db2777; font-size:0.75rem; font-weight:700; cursor:pointer;">📋 Salin</button>
+                        <button type="button" data-copy="{{ $settings['wh_sea_address'] }}" onclick="copyText(this)" style="background:none; border:none; color:#db2777; font-size:0.75rem; font-weight:700; cursor:pointer; padding:4px 8px; border-radius:6px; transition:background 0.2s;" onmouseover="this.style.background='rgba(219,39,119,0.08)';" onmouseout="this.style.background='none';">📋 Salin</button>
                     </div>
                     <div style="font-weight:600; color:var(--ink); font-size:0.875rem; line-height:1.45; word-break:break-word;">{{ $settings['wh_sea_address'] }}</div>
                 </div>
@@ -114,16 +114,92 @@
 </div>
 
 <script>
-function copyText(text, btn) {
-    navigator.clipboard.writeText(text).then(() => {
-        const originalText = btn.textContent;
-        btn.textContent = '✓ Tersalin!';
+function copyText(btn) {
+    const textToCopy = btn.getAttribute('data-copy') || '';
+    
+    const triggerSuccess = () => {
+        const originalText = btn.innerHTML;
+        btn.innerHTML = '✓ Tersalin!';
         btn.style.color = '#16a34a';
+
+        // Tampilkan pop-up toast kecil di sudut kanan atas
+        showCopyToastNotification();
+
         setTimeout(() => {
-            btn.textContent = originalText;
+            btn.innerHTML = originalText;
             btn.style.color = '';
-        }, 2000);
-    });
+        }, 2200);
+    };
+
+    if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(textToCopy)
+            .then(triggerSuccess)
+            .catch(() => fallbackCopy(textToCopy, triggerSuccess));
+    } else {
+        fallbackCopy(textToCopy, triggerSuccess);
+    }
+}
+
+function fallbackCopy(text, onSuccess) {
+    const textArea = document.createElement("textarea");
+    textArea.value = text;
+    textArea.style.position = "fixed";
+    textArea.style.left = "-999999px";
+    textArea.style.top = "-999999px";
+    document.body.appendChild(textArea);
+    textArea.focus();
+    textArea.select();
+    
+    try {
+        const successful = document.execCommand('copy');
+        if (successful && typeof onSuccess === 'function') {
+            onSuccess();
+        }
+    } catch (err) {
+        console.error('Fallback copy failed', err);
+    }
+    
+    document.body.removeChild(textArea);
+}
+
+function showCopyToastNotification() {
+    let toast = document.getElementById('copy-toast-notification');
+    if (!toast) {
+        toast = document.createElement('div');
+        toast.id = 'copy-toast-notification';
+        toast.style.cssText = `
+            position: fixed;
+            top: 24px;
+            right: 24px;
+            background: linear-gradient(135deg, #1e293b, #0f172a);
+            color: #ffffff;
+            padding: 10px 20px;
+            border-radius: 30px;
+            font-size: 0.875rem;
+            font-weight: 700;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            z-index: 99999;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            opacity: 0;
+            transform: translateY(-15px);
+            pointer-events: none;
+        `;
+        document.body.appendChild(toast);
+    }
+    
+    toast.innerHTML = '📋 <span style="color:#4ade80;">Teks Berhasil Disalin!</span>';
+    toast.style.opacity = '1';
+    toast.style.transform = 'translateY(0)';
+
+    if (window.toastTimeout) clearTimeout(window.toastTimeout);
+    window.toastTimeout = setTimeout(() => {
+        toast.style.opacity = '0';
+        toast.style.transform = 'translateY(-15px)';
+    }, 2200);
 }
 </script>
 @endsection

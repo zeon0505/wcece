@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends(Auth::check() ? 'layouts.app' : 'layouts.public')
 @section('title', 'Syarat & Ketentuan')
 
 @section('content')
@@ -45,9 +45,16 @@
 
         {{-- Action Buttons Rata Tengah --}}
         <div style="padding-top:1.5rem; border-top:1px solid var(--line); display:flex; justify-content:center; align-items:center; gap:0.75rem; flex-wrap:wrap;">
-            <a href="{{ route('dashboard') }}" style="display:inline-flex; align-items:center; gap:0.4rem; padding:0.7rem 1.5rem; background:var(--ink); color:#fff; font-weight:700; font-size:0.875rem; border-radius:12px; text-decoration:none; box-shadow:0 4px 14px rgba(0,0,0,0.12); transition:transform 0.2s;" onmouseover="this.style.transform='translateY(-2px)';" onmouseout="this.style.transform='translateY(0)';">
-                ← Kembali ke Dashboard
-            </a>
+            @auth
+                <a href="{{ route('dashboard') }}" style="display:inline-flex; align-items:center; gap:0.4rem; padding:0.7rem 1.5rem; background:var(--ink); color:#fff; font-weight:700; font-size:0.875rem; border-radius:12px; text-decoration:none; box-shadow:0 4px 14px rgba(0,0,0,0.12); transition:transform 0.2s;" onmouseover="this.style.transform='translateY(-2px)';" onmouseout="this.style.transform='translateY(0)';">
+                    ← Kembali ke Dashboard
+                </a>
+            @else
+                <a href="{{ route('register') }}" style="display:inline-flex; align-items:center; gap:0.4rem; padding:0.7rem 1.5rem; background:var(--ink); color:#fff; font-weight:700; font-size:0.875rem; border-radius:12px; text-decoration:none; box-shadow:0 4px 14px rgba(0,0,0,0.12); transition:transform 0.2s;" onmouseover="this.style.transform='translateY(-2px)';" onmouseout="this.style.transform='translateY(0)';">
+                    ← Kembali ke Pendaftaran
+                </a>
+            @endauth
+
             <a href="{{ route('privacy') }}" style="display:inline-flex; align-items:center; gap:0.4rem; padding:0.7rem 1.5rem; background:var(--surface); color:var(--ink); font-weight:700; font-size:0.875rem; border-radius:12px; text-decoration:none; border:1.5px solid var(--line); transition:all 0.2s;">
                 Kebijakan Privasi &rarr;
             </a>

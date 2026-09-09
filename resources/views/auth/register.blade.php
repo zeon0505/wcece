@@ -77,20 +77,10 @@
                 <label class="form-label" for="password_confirmation">Konfirmasi Password</label>
                 <input id="password_confirmation" type="password" name="password_confirmation" class="form-input" required autocomplete="new-password" placeholder="Ulangi password">
             </div>
-            @php
-                $tncText = \App\Http\Controllers\Admin\SettingsController::get('tnc_content', '');
-            @endphp
-            @if($tncText)
-                <div style="margin-bottom:1rem;">
-                    <label class="form-label" style="display:block; font-size:0.8rem; font-weight:700; color:var(--ink); margin-bottom:0.3rem;">Syarat &amp; Ketentuan (TnC)</label>
-                    <div style="max-height:130px; overflow-y:auto; background:rgba(255,255,255,0.9); border:1px solid rgba(208, 215, 224, 0.8); border-radius:10px; padding:0.65rem 0.85rem; font-size:0.75rem; color:var(--ink); line-height:1.45; white-space:pre-line;">{{ $tncText }}</div>
-                </div>
-            @endif
-
-            <div class="form-group" style="display:flex; align-items:flex-start; gap:0.5rem; margin-bottom:1.5rem; padding-top:0.25rem;">
+            <div class="form-group" style="display:flex; align-items:flex-start; gap:0.5rem; margin-bottom:1.5rem; padding-top:0.5rem;">
                 <input type="checkbox" id="tnc" name="tnc" required style="margin-top:0.2rem; cursor:pointer;" {{ old('tnc') ? 'checked' : '' }}>
                 <label for="tnc" style="font-size:0.8rem; color:var(--ink-soft); line-height:1.4; cursor:pointer; font-weight:normal;">
-                    Saya menyetujui <a href="{{ route('tnc') }}" target="_blank" style="color:var(--blue-deep); text-decoration:none; font-weight:600;">Syarat & Ketentuan</a> di atas serta <a href="{{ route('privacy') }}" target="_blank" style="color:var(--blue-deep); text-decoration:none; font-weight:600;">Kebijakan Privasi</a> yang berlaku.
+                    Saya menyetujui <a href="{{ route('tnc') }}" target="_blank" style="color:var(--blue-deep); text-decoration:none; font-weight:600;">Syarat & Ketentuan</a> serta <a href="{{ route('privacy') }}" target="_blank" style="color:var(--blue-deep); text-decoration:none; font-weight:600;">Kebijakan Privasi</a> yang berlaku.
                 </label>
             </div>
             <button type="submit" id="register-submit" class="btn btn-primary" style="width:100%; justify-content:center;">Buat Akun</button>
