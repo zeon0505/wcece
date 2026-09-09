@@ -270,5 +270,52 @@ document.querySelectorAll('.admin-sidebar a').forEach(a => {
     });
 });
 </script>
+
+{{-- ═══════════ GLOBAL CUSTOM CONFIRM MODAL ═══════════ --}}
+<div id="gModal" style="display:none; position:fixed; inset:0; z-index:99999; align-items:center; justify-content:center;">
+    <div id="gModalBackdrop" style="position:absolute; inset:0; background:rgba(15,23,42,0.5); backdrop-filter:blur(5px);" onclick="gModalClose()"></div>
+    <div style="position:relative; background:#fff; border-radius:20px; padding:2rem 2rem 1.5rem; max-width:400px; width:90%; box-shadow:0 30px 70px rgba(0,0,0,0.2); animation:gModalIn 0.22s cubic-bezier(0.34,1.56,0.64,1) forwards;">
+        <div id="gModalIcon" style="width:60px; height:60px; border-radius:18px; display:flex; align-items:center; justify-content:center; font-size:1.8rem; margin:0 auto 1rem;"></div>
+        <h3 id="gModalTitle" style="font-size:1.1rem; font-weight:800; color:#0f172a; text-align:center; margin:0 0 0.5rem;"></h3>
+        <p id="gModalBody" style="font-size:0.875rem; color:#64748b; text-align:center; margin:0 0 1.5rem; line-height:1.55;"></p>
+        <div style="display:flex; gap:0.75rem;">
+            <button onclick="gModalClose()" style="flex:1; padding:0.7rem; background:#f1f5f9; color:#475569; font-size:0.875rem; font-weight:700; border:none; border-radius:12px; cursor:pointer;" onmouseover="this.style.background='#e2e8f0'" onmouseout="this.style.background='#f1f5f9'">Batal</button>
+            <button id="gModalBtn" style="flex:1; padding:0.7rem; color:#fff; font-size:0.875rem; font-weight:700; border:none; border-radius:12px; cursor:pointer;" onmouseover="this.style.filter='brightness(0.88)'" onmouseout="this.style.filter='none'">Konfirmasi</button>
+        </div>
+    </div>
+</div>
+<style>
+@keyframes gModalIn {
+    from { opacity:0; transform:scale(0.86) translateY(12px); }
+    to   { opacity:1; transform:scale(1)    translateY(0); }
+}
+</style>
+<script>
+let _gModalForm = null;
+function gConfirm(opts) {
+    document.getElementById('gModalIcon').textContent  = opts.icon    || '⚠️';
+    document.getElementById('gModalIcon').style.background = opts.iconBg || '#fef9c3';
+    document.getElementById('gModalTitle').textContent = opts.title   || 'Konfirmasi';
+    document.getElementById('gModalBody').innerHTML    = opts.body    || '';
+    const btn = document.getElementById('gModalBtn');
+    btn.textContent     = opts.btnText  || 'Ya, Lanjutkan';
+    btn.style.background = opts.btnColor || '#f59e0b';
+    _gModalForm = opts.form || null;
+    document.getElementById('gModal').style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+}
+function gModalClose() {
+    document.getElementById('gModal').style.display = 'none';
+    document.body.style.overflow = '';
+    _gModalForm = null;
+}
+document.getElementById('gModalBtn').addEventListener('click', function() {
+    if (_gModalForm) _gModalForm.submit();
+    gModalClose();
+});
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') gModalClose();
+});
+</script>
 </body>
 </html>
