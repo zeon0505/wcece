@@ -170,7 +170,7 @@ class ResiController extends Controller
         $field = $request->type === 'wh_china' ? 'photo_wh_china' : 'photo_arrived_id';
         $resi->update([$field => $filename]);
 
-        dispatch(new \App\Jobs\SendPhotoEmailNotification($resi->id, $request->type))->afterResponse();
+        dispatch(new \App\Jobs\SendPhotoEmailNotification($resi->id, $request->type));
 
         return back()->with('success', 'Foto berhasil diupload dan notifikasi email sedang dikirim.');
     }

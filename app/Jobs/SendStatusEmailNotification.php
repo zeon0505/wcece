@@ -5,18 +5,11 @@ namespace App\Jobs;
 use App\Mail\ResiStatusUpdatedMail;
 use App\Models\Resi;
 use App\Models\User;
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Foundation\Queue\Queueable;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 
 class SendStatusEmailNotification
 {
-    use Queueable;
-
-    public int $tries = 3;
-    public int $timeout = 120;
-
     public function __construct(public readonly int $resiId) {}
 
     public function handle(): void
@@ -27,14 +20,28 @@ class SendStatusEmailNotification
             return;
         }
 
-        $emails = User::whereNotNull('email')->where('email', '!=', '')->pluck('email')->unique();
+        $emails = [];
+        if ($resi->user && ! empty($resi->user->email)) {
+            $emails[] = $resi->user->email;
+        } else {
+            $emails = User::whereNotNull('email')->where('email', '!=', '')->pluck('email')->unique()->toArray();
+        }
 
-        foreach ($emails as $email) {
-            try {
-                Mail::to($email)->send(new ResiStatusUpdatedMail($resi));
-            } catch (\Throwable $e) {
-                Log::error("Failed to send status notification email to {$email}: " . $e->getMessage());
+        if (empty($emails)) {
+            return;
+        }
+
+        $primary = array_shift($emails);
+
+        try {
+            $mailable = new ResiStatusUpdatedMail($resi);
+            if (! empty($emails)) {
+                Mail::to($primary)->bcc($emails)->send($mailable);
+            } else {
+                Mail::to($primary)->send($mailable);
             }
+        } catch (\Throwable $e) {
+            Log::error("Failed to send status notification email for resi {$this->resiId}: " . $e->getMessage());
         }
     }
 }
