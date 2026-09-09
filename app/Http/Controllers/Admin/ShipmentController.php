@@ -288,7 +288,7 @@ class ShipmentController extends Controller
                     \Illuminate\Support\Facades\Log::error('BoxPhoto mail failed for ' . $user->email . ': ' . $e->getMessage());
                 }
             }
-        })->afterResponse();
+        });
 
         return redirect()->route('admin.shipments.show', $shipment)
             ->with('success', 'Foto box berhasil diupload dan notifikasi email sedang dikirim ke seluruh customer.');
