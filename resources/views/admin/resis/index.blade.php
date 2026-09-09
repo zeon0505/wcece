@@ -134,9 +134,9 @@
                         <td style="padding:0.875rem 1rem; text-align:right; white-space:nowrap;">
                             <div style="display:inline-flex; gap:0.4rem;">
                                 <a href="{{ route('admin.resis.show', $resi) }}" style="font-size:0.75rem; padding:0.3rem 0.7rem; background:var(--bg); border:1px solid var(--line); border-radius:6px; text-decoration:none; color:var(--ink); font-weight:500;">Detail</a>
-                                <form method="POST" action="{{ route('admin.resis.destroy', $resi) }}" style="display:inline;" onsubmit="return confirm('Hapus resi {{ $resi->resi_number }}? Tindakan ini tidak bisa dibatalkan.')">
+                                <form id="del-resi-{{ $resi->id }}" method="POST" action="{{ route('admin.resis.destroy', $resi) }}" style="display:inline;">
                                     @csrf @method('DELETE')
-                                    <button type="submit" style="font-size:0.75rem; padding:0.3rem 0.7rem; background:#fef2f2; border:1px solid #fecaca; border-radius:6px; color:#dc2626; font-weight:500; cursor:pointer;">Hapus</button>
+                                    <button type="button" style="font-size:0.75rem; padding:0.3rem 0.7rem; background:#fef2f2; border:1px solid #fecaca; border-radius:6px; color:#dc2626; font-weight:500; cursor:pointer;" onclick="gConfirm({icon:'🗑️',iconBg:'#fee2e2',title:'Hapus Resi?',body:'Resi <strong>{{ addslashes($resi->resi_number) }}</strong> akan dihapus permanen. Aksi ini tidak bisa dibatalkan.',btnText:'Ya, Hapus',btnColor:'#dc2626',form:document.getElementById('del-resi-{{ $resi->id }}')})">Hapus</button>
                                 </form>
                             </div>
                         </td>

@@ -61,15 +61,17 @@
                         </td>
                         <td style="padding:0.875rem 1rem; text-align:right; white-space:nowrap;">
                             <div style="display:inline-flex; gap:0.4rem; justify-content:flex-end;">
-                                <form method="POST" action="{{ route('admin.payments.verify', $payment) }}" onsubmit="return confirm('Konfirmasi verifikasi pembayaran ini?')">
+                                <form id="pay-verify-{{ $payment->id }}" method="POST" action="{{ route('admin.payments.verify', $payment) }}">
                                     @csrf
-                                    <button type="submit" style="font-size:0.75rem; padding:0.35rem 0.75rem; background:#059669; color:#fff; border:none; border-radius:6px; font-weight:700; cursor:pointer;">
+                                    <button type="button" style="font-size:0.75rem; padding:0.35rem 0.75rem; background:#059669; color:#fff; border:none; border-radius:6px; font-weight:700; cursor:pointer;"
+                                        onclick="gConfirm({icon:'✅',iconBg:'#dcfce7',title:'Verifikasi Pembayaran?',body:'Pembayaran ini akan ditandai sebagai lunas dan invoice diterbitkan.',btnText:'Ya, Verifikasi',btnColor:'#059669',form:document.getElementById('pay-verify-{{ $payment->id }}')})">
                                         ✓ Verifikasi
                                     </button>
                                 </form>
-                                <form method="POST" action="{{ route('admin.payments.reject', $payment) }}" onsubmit="return confirm('Tolak pembayaran ini?')">
+                                <form id="pay-reject-{{ $payment->id }}" method="POST" action="{{ route('admin.payments.reject', $payment) }}">
                                     @csrf
-                                    <button type="submit" style="font-size:0.75rem; padding:0.35rem 0.75rem; background:#fef2f2; border:1px solid #fecaca; color:#dc2626; border-radius:6px; font-weight:600; cursor:pointer;">
+                                    <button type="button" style="font-size:0.75rem; padding:0.35rem 0.75rem; background:#fef2f2; border:1px solid #fecaca; color:#dc2626; border-radius:6px; font-weight:600; cursor:pointer;"
+                                        onclick="gConfirm({icon:'❌',iconBg:'#fee2e2',title:'Tolak Pembayaran?',body:'Pembayaran ini akan ditolak dan user perlu upload ulang bukti bayar.',btnText:'Ya, Tolak',btnColor:'#dc2626',form:document.getElementById('pay-reject-{{ $payment->id }}')})">
                                         ✗ Tolak
                                     </button>
                                 </form>
