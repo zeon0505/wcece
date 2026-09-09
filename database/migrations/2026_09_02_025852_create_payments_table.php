@@ -10,13 +10,13 @@ return new class extends Migration
     {
         Schema::create('payments', function (Blueprint $table) {
             $table->engine = 'InnoDB';
-            $table->id();
-            $table->foreignId('invoice_id')->constrained();
+            $table->uuid('id')->primary();
+            $table->foreignUuid('invoice_id')->constrained();
             $table->enum('method', ['gateway', 'manual_transfer'])->default('manual_transfer');
             $table->string('gateway_reference')->nullable()->unique();
             $table->string('proof_file')->nullable();
             $table->enum('status', ['pending', 'verified', 'rejected'])->default('pending');
-            $table->foreignId('verified_by')->nullable()->constrained('users')->nullOnDelete();
+            $table->foreignUuid('verified_by')->nullable()->constrained('users')->nullOnDelete();
             $table->timestamp('verified_at')->nullable();
             $table->timestamps();
 

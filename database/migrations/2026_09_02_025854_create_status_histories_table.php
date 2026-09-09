@@ -10,11 +10,11 @@ return new class extends Migration
     {
         Schema::create('status_histories', function (Blueprint $table) {
             $table->engine = 'InnoDB';
-            $table->id();
-            $table->foreignId('resi_id')->constrained('resis')->cascadeOnDelete();
+            $table->uuid('id')->primary();
+            $table->foreignUuid('resi_id')->constrained('resis')->cascadeOnDelete();
             $table->string('from_status')->nullable();
             $table->string('to_status');
-            $table->foreignId('changed_by')->nullable()->constrained('users')->nullOnDelete();
+            $table->foreignUuid('changed_by')->nullable()->constrained('users')->nullOnDelete();
             $table->timestamps();
 
             $table->index('resi_id');

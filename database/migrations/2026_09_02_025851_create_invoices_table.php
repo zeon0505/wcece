@@ -10,10 +10,10 @@ return new class extends Migration
     {
         Schema::create('invoices', function (Blueprint $table) {
             $table->engine = 'InnoDB';
-            $table->id();
+            $table->uuid('id')->primary();
             $table->string('invoice_number')->unique();
-            $table->foreignId('user_id')->constrained();
-            $table->foreignId('master_shipment_id')->constrained();
+            $table->foreignUuid('user_id')->constrained();
+            $table->foreignUuid('master_shipment_id')->constrained();
             $table->decimal('total_weight_kg', 8, 2);
             $table->decimal('rate_per_kg', 10, 2);
             $table->decimal('handling_fee', 10, 2)->default(0);

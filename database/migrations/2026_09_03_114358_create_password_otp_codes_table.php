@@ -9,7 +9,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('password_otp_codes', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id')->primary();
             $table->string('email')->index();
             $table->string('otp_code', 6);
             $table->timestamp('expires_at');

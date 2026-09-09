@@ -10,14 +10,14 @@ return new class extends Migration
     {
         Schema::create('master_shipments', function (Blueprint $table) {
             $table->engine = 'InnoDB';
-            $table->id();
+            $table->uuid('id')->primary();
             $table->string('code')->unique();
             $table->enum('status', ['in_transit', 'arrived_indonesia', 'completed'])->default('in_transit');
             $table->decimal('rate_per_kg', 10, 2)->nullable();
             $table->decimal('handling_fee', 10, 2)->default(0);
             $table->timestamp('departed_at')->nullable();
             $table->timestamp('arrived_at')->nullable();
-            $table->foreignId('created_by')->constrained('users');
+            $table->foreignUuid('created_by')->constrained('users');
             $table->timestamps();
 
             $table->index('status');

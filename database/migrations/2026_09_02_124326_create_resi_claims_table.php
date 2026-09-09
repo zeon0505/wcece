@@ -12,10 +12,10 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('resi_claims', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('resi_id')->constrained()->cascadeOnDelete();
-            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
-            $table->string('pickup_code');
+            $table->uuid('id')->primary();
+            $table->foreignUuid('resi_id')->constrained()->cascadeOnDelete();
+            $table->foreignUuid('user_id')->constrained()->cascadeOnDelete();
+            $table->string('pickup_code')->nullable();
             $table->string('proof_photo');
             $table->string('status')->default('pending'); // pending, approved, rejected
             $table->timestamps();

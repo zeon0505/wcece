@@ -10,9 +10,9 @@ return new class extends Migration
     {
         Schema::create('resis', function (Blueprint $table) {
             $table->engine = 'InnoDB';
-            $table->id();
-            $table->foreignId('user_id')->nullable()->constrained()->nullOnDelete();
-            $table->foreignId('master_shipment_id')->nullable()->constrained()->nullOnDelete();
+            $table->uuid('id')->primary();
+            $table->foreignUuid('user_id')->nullable()->constrained()->nullOnDelete();
+            $table->foreignUuid('master_shipment_id')->nullable()->constrained()->nullOnDelete();
             $table->string('resi_number')->unique();
             $table->string('item_name')->nullable();
             $table->string('customer_name_snapshot')->nullable();

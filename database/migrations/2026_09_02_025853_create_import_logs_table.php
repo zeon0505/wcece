@@ -10,8 +10,8 @@ return new class extends Migration
     {
         Schema::create('import_logs', function (Blueprint $table) {
             $table->engine = 'InnoDB';
-            $table->id();
-            $table->foreignId('uploaded_by')->constrained('users');
+            $table->uuid('id')->primary();
+            $table->foreignUuid('uploaded_by')->constrained('users');
             $table->string('file_name');
             $table->integer('total_rows')->default(0);
             $table->integer('matched_count')->default(0);

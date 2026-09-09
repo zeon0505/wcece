@@ -2,10 +2,12 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Model;
 
 class PasswordOtpCode extends Model
 {
+    use HasUuids;
     protected $fillable = ['email', 'otp_code', 'expires_at', 'used'];
 
     protected function casts(): array

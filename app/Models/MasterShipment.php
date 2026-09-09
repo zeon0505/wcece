@@ -2,13 +2,14 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class MasterShipment extends Model
 {
     /** @use HasFactory<\Database\Factories\MasterShipmentFactory> */
-    use HasFactory;
+    use HasFactory, HasUuids;
 
     protected $fillable = [
         'code',
@@ -58,10 +59,9 @@ class MasterShipment extends Model
      */
     public static function generateCode(): string
     {
-        $last = self::latest('id')->first();
-        $nextNumber = $last ? ($last->id + 1) : 1;
+        $count = self::count() + 1;
 
-        return 'MS-' . str_pad($nextNumber, 3, '0', STR_PAD_LEFT);
+        return 'MS-' . str_pad($count, 3, '0', STR_PAD_LEFT);
     }
 
     /** @return \Illuminate\Database\Eloquent\Relations\HasMany<Resi, $this> */
