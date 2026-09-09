@@ -3,21 +3,24 @@
 namespace App\Jobs;
 
 use App\Mail\ResiStatusUpdatedMail;
-use App\Models\Resi;
 use App\Models\User;
+use App\Models\Resi;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Queue\Queueable;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 
-class SendStatusEmailNotification implements ShouldQueue
+class SendPhotoEmailNotification implements ShouldQueue
 {
     use Queueable;
 
     public int $tries = 3;
     public int $timeout = 120;
 
-    public function __construct(public readonly int $resiId) {}
+    public function __construct(
+        public readonly int $resiId,
+        public readonly string $type
+    ) {}
 
     public function handle(): void
     {
@@ -31,9 +34,9 @@ class SendStatusEmailNotification implements ShouldQueue
 
         foreach ($emails as $email) {
             try {
-                Mail::to($email)->send(new ResiStatusUpdatedMail($resi));
+                Mail::to($email)->send(new ResiStatusUpdatedMail($resi, $this->type));
             } catch (\Throwable $e) {
-                Log::error("Failed to send status notification email to {$email}: " . $e->getMessage());
+                Log::error("Failed to send photo notification email to {$email}: " . $e->getMessage());
             }
         }
     }
