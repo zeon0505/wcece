@@ -63,21 +63,25 @@
     </div>
 </div>
 
+<style>
+    .dash-tab { padding:0.6rem 1.2rem; border-radius:10px; font-size:0.8rem; font-weight:600; text-decoration:none; white-space:nowrap; transition:all 0.2s; display:inline-block; }
+    .dash-tab-active { background:var(--ink); color:#fff; box-shadow:0 4px 12px rgba(0,0,0,0.1); }
+    .dash-tab-inactive { background:transparent; color:var(--ink-soft); }
+</style>
+
 {{-- Status Filter Tabs --}}
 <div style="display:flex; overflow-x:auto; gap:0.5rem; background:var(--white); padding:0.5rem; border-radius:14px; border:1px solid var(--line); margin-bottom:1.5rem; box-shadow:0 4px 15px rgba(0,0,0,0.02);">
     @php
         $isAllActive = $statusFilter === 'all';
-        $allStyle = $isAllActive ? 'background:var(--ink); color:#fff; box-shadow:0 4px 12px rgba(0,0,0,0.1);' : 'background:transparent; color:var(--ink-soft);';
     @endphp
-    <a href="{{ route('dashboard') }}" style="padding:0.6rem 1.2rem; border-radius:10px; font-size:0.8rem; font-weight:600; text-decoration:none; white-space:nowrap; transition:all 0.2s; {{ $allStyle }}">
+    <a href="{{ route('dashboard') }}" class="dash-tab {{ $isAllActive ? 'dash-tab-active' : 'dash-tab-inactive' }}">
         Semua ({{ $counts->sum() }})
     </a>
     @foreach(\App\Models\Resi::$statusLabels as $key => $label)
         @php
             $isActive = $statusFilter === $key;
-            $tabStyle = $isActive ? 'background:var(--ink); color:#fff; box-shadow:0 4px 12px rgba(0,0,0,0.1);' : 'background:transparent; color:var(--ink-soft);';
         @endphp
-        <a href="{{ route('dashboard', ['status' => $key]) }}" style="padding:0.6rem 1.2rem; border-radius:10px; font-size:0.8rem; font-weight:600; text-decoration:none; white-space:nowrap; transition:all 0.2s; {{ $tabStyle }}">
+        <a href="{{ route('dashboard', ['status' => $key]) }}" class="dash-tab {{ $isActive ? 'dash-tab-active' : 'dash-tab-inactive' }}">
             {{ $label }}
             @if($counts->get($key)) ({{ $counts->get($key) }}) @endif
         </a>

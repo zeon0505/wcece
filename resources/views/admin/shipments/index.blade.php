@@ -4,6 +4,9 @@
 @section('content')
 <style>
     .header-actions { display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-bottom: 1.5rem; }
+    .filter-tab { padding: 0.4rem 1rem; border-radius: 8px; font-size: 0.85rem; font-weight: 600; text-decoration: none; display: inline-block; }
+    .filter-tab.active { background: var(--ink); color: #fff; }
+    .filter-tab.inactive { background: var(--surface); color: var(--ink-soft); border: 1px solid var(--line); }
     @media (max-width: 640px) {
         .header-actions { flex-direction: column; align-items: flex-start; }
         .header-actions a { width: 100%; justify-content: center; text-align: center; }
@@ -23,16 +26,16 @@
 
 {{-- Filter Tabs --}}
 <div style="display:flex; gap:0.5rem; margin-bottom:1.5rem; flex-wrap:wrap;">
-    <a href="{{ route('admin.shipments.index') }}" style="padding:0.4rem 1rem; border-radius:8px; font-size:0.85rem; font-weight:600; text-decoration:none; {{ $typeFilter === 'all' ? 'background:var(--ink); color:#fff;' : 'background:var(--surface); color:var(--ink-soft); border:1px solid var(--line);' }}">
+    <a href="{{ route('admin.shipments.index') }}" class="filter-tab {{ $typeFilter === 'all' ? 'active' : 'inactive' }}">
         Semua ({{ $counts['all'] ?? 0 }})
     </a>
-    <a href="{{ route('admin.shipments.index', ['type' => 'SEA']) }}" style="padding:0.4rem 1rem; border-radius:8px; font-size:0.85rem; font-weight:600; text-decoration:none; {{ $typeFilter === 'SEA' ? 'background:var(--ink); color:#fff;' : 'background:var(--surface); color:var(--ink-soft); border:1px solid var(--line);' }}">
+    <a href="{{ route('admin.shipments.index', ['type' => 'SEA']) }}" class="filter-tab {{ $typeFilter === 'SEA' ? 'active' : 'inactive' }}">
         🚢 Sea Cargo ({{ $counts['SEA'] ?? 0 }})
     </a>
-    <a href="{{ route('admin.shipments.index', ['type' => 'AIR']) }}" style="padding:0.4rem 1rem; border-radius:8px; font-size:0.85rem; font-weight:600; text-decoration:none; {{ $typeFilter === 'AIR' ? 'background:var(--ink); color:#fff;' : 'background:var(--surface); color:var(--ink-soft); border:1px solid var(--line);' }}">
+    <a href="{{ route('admin.shipments.index', ['type' => 'AIR']) }}" class="filter-tab {{ $typeFilter === 'AIR' ? 'active' : 'inactive' }}">
         ✈️ Air Cargo ({{ $counts['AIR'] ?? 0 }})
     </a>
-    <a href="{{ route('admin.shipments.index', ['type' => 'HANDCARRY']) }}" style="padding:0.4rem 1rem; border-radius:8px; font-size:0.85rem; font-weight:600; text-decoration:none; {{ $typeFilter === 'HANDCARRY' ? 'background:var(--ink); color:#fff;' : 'background:var(--surface); color:var(--ink-soft); border:1px solid var(--line);' }}">
+    <a href="{{ route('admin.shipments.index', ['type' => 'HANDCARRY']) }}" class="filter-tab {{ $typeFilter === 'HANDCARRY' ? 'active' : 'inactive' }}">
         👜 Handcarry ({{ $counts['HANDCARRY'] ?? 0 }})
     </a>
 </div>

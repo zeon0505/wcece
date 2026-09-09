@@ -4,6 +4,10 @@
 @section('content')
 <style>
     .resi-detail-grid { display: grid; grid-template-columns: 1fr 340px; gap: 1.25rem; align-items: start; }
+    .badge-type { font-size:0.72rem; font-weight:800; padding:0.2rem 0.55rem; border-radius:6px; display:inline-block; }
+    .badge-sea { background:#e0f2fe; color:#0284c7; }
+    .badge-air { background:#ffedd5; color:#ea580c; }
+    .badge-handcarry { background:#fce7f3; color:#db2777; }
     
     @media (max-width: 850px) {
         .resi-detail-grid { grid-template-columns: 1fr !important; }
@@ -119,15 +123,19 @@
                         <div style="padding:0.75rem 0.9rem; background:#f8fafc; border-radius:10px; border:1px solid var(--line);">
                             <div style="font-size:0.68rem; font-weight:700; color:var(--ink-soft); text-transform:uppercase; letter-spacing:0.05em; margin-bottom:0.25rem;">Tipe</div>
                             @php
-                                $typeColors = [
-                                    'SEA' => ['bg' => '#e0f2fe', 'color' => '#0284c7', 'label' => '🚢 SEA'],
-                                    'AIR' => ['bg' => '#ffedd5', 'color' => '#ea580c', 'label' => '✈️ AIR'],
-                                    'HANDCARRY' => ['bg' => '#fce7f3', 'color' => '#db2777', 'label' => '🛍️ HC'],
-                                ];
-                                $tc = $typeColors[$resi->shipment_type ?? 'SEA'] ?? $typeColors['SEA'];
-                                $badgeStyle = "font-size:0.72rem; font-weight:800; color:{$tc['color']}; background:{$tc['bg']}; padding:0.2rem 0.55rem; border-radius:6px;";
+                                $shipType = strtoupper($resi->shipment_type ?? 'SEA');
+                                $typeClass = match($shipType) {
+                                    'AIR' => 'badge-air',
+                                    'HANDCARRY' => 'badge-handcarry',
+                                    default => 'badge-sea'
+                                };
+                                $typeLabel = match($shipType) {
+                                    'AIR' => '✈️ AIR',
+                                    'HANDCARRY' => '🛍️ HC',
+                                    default => '🚢 SEA'
+                                };
                             @endphp
-                            <div><span style="{{ $badgeStyle }}">{{ $tc['label'] }}</span></div>
+                            <div><span class="badge-type {{ $typeClass }}">{{ $typeLabel }}</span></div>
                         </div>
                     </div>
 
