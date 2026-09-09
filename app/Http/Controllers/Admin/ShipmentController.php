@@ -277,7 +277,7 @@ class ShipmentController extends Controller
             'photo_box_uploaded_at' => now(),
         ]);
 
-        dispatch(new \App\Jobs\SendBoxPhotoEmailNotification($shipment->id));
+        dispatch(new \App\Jobs\SendBoxPhotoEmailNotification($shipment->id))->afterResponse();
 
         return redirect()->route('admin.shipments.show', $shipment)
             ->with('success', 'Foto box berhasil diupload dan notifikasi email sedang dikirim ke seluruh customer.');

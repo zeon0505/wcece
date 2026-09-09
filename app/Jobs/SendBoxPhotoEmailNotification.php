@@ -10,7 +10,7 @@ use Illuminate\Foundation\Queue\Queueable;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 
-class SendBoxPhotoEmailNotification implements ShouldQueue
+class SendBoxPhotoEmailNotification
 {
     use Queueable;
 

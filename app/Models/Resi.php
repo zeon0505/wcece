@@ -105,7 +105,7 @@ class Resi extends Model
             'changed_by' => $changedById,
         ]);
 
-        dispatch(new SendStatusEmailNotification($this->id));
+        dispatch(new SendStatusEmailNotification($this->id))->afterResponse();
     }
 
     /** @return \Illuminate\Database\Eloquent\Relations\BelongsTo<User, $this> */
