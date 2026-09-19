@@ -3,13 +3,14 @@
 namespace App\Models;
 
 use App\Jobs\SendStatusEmailNotification;
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Resi extends Model
 {
     /** @use HasFactory<\Database\Factories\ResiFactory> */
-    use HasFactory;
+    use HasFactory, HasUuids;
 
     protected $fillable = [
         'user_id',

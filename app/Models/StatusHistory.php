@@ -2,11 +2,14 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Model;
 
 class StatusHistory extends Model
 {
-        protected $fillable = [
+    use HasUuids;
+
+    protected $fillable = [
         'resi_id',
         'from_status',
         'to_status',
