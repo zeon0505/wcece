@@ -8,7 +8,7 @@
     <style>
         body { margin:0; min-height:100vh; display:flex; align-items:center; justify-content:center; position:relative; overflow:hidden; }
         .blob-1 { position:fixed; top:-10%; left:-10%; width:50vw; height:50vw; border-radius:50%; background:radial-gradient(circle, rgba(95,168,211,0.4) 0%, rgba(255,255,255,0) 70%); z-index:0; filter:blur(60px); pointer-events:none; }
-        .blob-2 { position:fixed; bottom:-20%; right:-10%; width:60vw; height:60vw; border-radius:50%; background:radial-gradient(circle, rgba(224,143,178,0.3) 0%, rgba(255,255,255,0) 70%); z-index:0; filter:blur:80px; pointer-events:none; }
+        .blob-2 { position:fixed; bottom:-20%; right:-10%; width:60vw; height:60vw; border-radius:50%; background:radial-gradient(circle, rgba(224,143,178,0.3) 0%, rgba(255,255,255,0) 70%); z-index:0; filter:blur(80px); pointer-events:none; }
         .auth-wrap { width:100%; display:flex; align-items:center; justify-content:center; padding:2rem 1rem; position:relative; z-index:10; }
         .auth-box { background:rgba(255,255,255,0.75); backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px); border:1px solid rgba(255,255,255,0.85); border-radius:24px; padding:2.5rem; width:100%; max-width:430px; box-shadow:0 20px 40px rgba(95,168,211,0.15); }
         .auth-logo { font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:1.3rem; color:var(--ink); display:flex; align-items:center; gap:0.5rem; margin-bottom:1.75rem; justify-content:center; }
