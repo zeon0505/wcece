@@ -23,11 +23,11 @@ class ResiStatusUpdatedMail extends Mailable
     public function envelope(): Envelope
     {
         if ($this->uploadedPhotoType === 'wh_china') {
-            $subject = '[WH CE] Foto Paket Tiba Gudang China - ' . $this->resi->resi_number;
+            $subject = '[Warehouse] Foto Paket Tiba Gudang China - ' . $this->resi->resi_number;
         } elseif ($this->uploadedPhotoType === 'arrived_id') {
-            $subject = '[WH CE] Foto Paket Tiba Indonesia - ' . $this->resi->resi_number;
+            $subject = '[Warehouse] Foto Paket Tiba Indonesia - ' . $this->resi->resi_number;
         } else {
-            $subject = '[WH CE] Update Status Paket ' . $this->resi->resi_number;
+            $subject = '[Warehouse] Update Status Paket ' . $this->resi->resi_number;
         }
 
         return new Envelope(

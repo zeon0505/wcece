@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@yield('title', 'Informasi') — WH CHINA by CECE</title>
+    <title>@yield('title', 'Informasi') — Warehouse</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <style>
         body { 
@@ -76,7 +76,7 @@
     <nav class="landing-navbar">
         <a href="{{ route('home') }}" class="landing-brand">
             <span style="width:12px;height:12px;background:var(--pink-deep);border-radius:50%;display:inline-block;"></span>
-            WH CHINA by CECE
+            Warehouse
         </a>
         <div class="landing-nav">
             <a href="{{ route('home') }}#cara-kerja">Cara Kerja</a>
@@ -100,7 +100,7 @@
 
     {{-- Footer --}}
     <footer class="footer">
-        &copy; {{ date('Y') }} WH CHINA by CECE. All rights reserved.
+        &copy; {{ date('Y') }} Warehouse. All rights reserved.
     </footer>
 
 </body>

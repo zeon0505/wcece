@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <meta name="description" content="WH CHINA by CECE Admin — Panel pengelolaan gudang dan pengiriman.">
-    <title>@yield('title', 'Admin') — WH CE Admin</title>
+    <meta name="description" content="Warehouse Admin — Panel pengelolaan gudang dan pengiriman.">
+    <title>@yield('title', 'Admin') — Warehouse Admin</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <style>
         * { box-sizing: border-box; }
@@ -99,7 +99,7 @@
             <span style="display:flex; align-items:center; justify-content:center; width:30px; height:30px; background:linear-gradient(135deg, var(--ink), #4f46e5); border-radius:8px; color:#fff; flex-shrink:0;">
                 <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/></svg>
             </span>
-            <span style="font-weight:800; font-size:1rem; color:var(--ink); letter-spacing:-0.02em;">WH CE <span style="color:var(--ink-soft); font-weight:500;">Admin</span></span>
+            <span style="font-weight:800; font-size:1rem; color:var(--ink); letter-spacing:-0.02em;">Warehouse <span style="color:var(--ink-soft); font-weight:500;">Admin</span></span>
         </a>
     </div>
 

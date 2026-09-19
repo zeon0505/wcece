@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Masuk — WH CHINA by CECE</title>
+    <title>Masuk — Warehouse</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <style>
         .blob-1 { position: fixed; top: -10%; left: -10%; width: 50vw; height: 50vw; border-radius: 50%; background: radial-gradient(circle, rgba(95, 168, 211, 0.4) 0%, rgba(255,255,255,0) 70%); z-index: 0; filter: blur(60px); pointer-events:none; }
@@ -29,7 +29,7 @@
     <div class="auth-box">
         <div class="auth-logo">
             <span style="width:10px;height:10px;background:var(--blue-deep);border-radius:50%;display:inline-block;"></span>
-            WH CHINA by CECE
+            Warehouse
         </div>
 
         <div style="text-align: center; margin-bottom: 2rem;">

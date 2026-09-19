@@ -1,7 +1,7 @@
-﻿<nav class="landing-navbar">
+<nav class="landing-navbar">
     <a href="{{ route('home') }}" class="landing-brand">
         <span style="width:12px;height:12px;background:var(--pink-deep);border-radius:50%;display:inline-block;"></span>
-        WH CHINA by CECE
+        Warehouse
     </a>
     <div class="landing-nav">
         <a href="{{ request()->routeIs('home') ? '#cara-kerja' : route('home') . '#cara-kerja' }}">Cara Kerja</a>

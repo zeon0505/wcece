@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WH CHINA by CECE — Jasa Forwarding China ke Indonesia</title>
+    <title>Warehouse — Jasa Forwarding China ke Indonesia</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <style>
         /* Pastel theme overrides */
@@ -157,7 +157,7 @@
     <nav class="landing-navbar">
         <a href="{{ route('home') }}" class="landing-brand">
             <span style="width:12px;height:12px;background:var(--pink-deep);border-radius:50%;display:inline-block;"></span>
-            WH CHINA by CECE
+            Warehouse
         </a>
         <div class="landing-nav">
             <a href="{{ request()->routeIs('home') ? '#cara-kerja' : route('home') . '#cara-kerja' }}">Cara Kerja</a>
@@ -200,7 +200,7 @@
                     <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
                 </div>
                 <h3 class="feature-title">1. Daftar & Dapatkan Alamat</h3>
-                <p class="feature-text">Buat akun WH CHINA by CECE dan dapatkan alamat unik gudang kami di China beserta marking code khusus Anda.</p>
+                <p class="feature-text">Buat akun Warehouse dan dapatkan alamat unik gudang kami di China beserta marking code khusus Anda.</p>
             </div>
             
             <div class="glass-card feature-card">
@@ -231,7 +231,7 @@
         <div style="max-width: 1200px; margin: 0 auto;">
             <!-- Poster Centered -->
             <div style="max-width: 700px; margin: 0 auto 3rem auto; text-align: center;">
-                <img src="/images/poster.webp" alt="Poster Harga WH CHINA by CECE" style="width: 100%; border-radius: 20px; box-shadow: 0 20px 40px rgba(95, 168, 211, 0.2); border: 6px solid rgba(255,255,255,0.7);">
+                <img src="/images/poster.webp" alt="Poster Harga Warehouse" style="width: 100%; border-radius: 20px; box-shadow: 0 20px 40px rgba(95, 168, 211, 0.2); border: 6px solid rgba(255,255,255,0.7);">
                 <p style="text-align: center; font-size: 0.8rem; color: var(--ink-soft); margin-top: 1rem;">
                   
                 </p>
@@ -302,7 +302,7 @@
     <section class="cta">
         <div class="cta-content">
             <h2>Mulai Import Hari Ini</h2>
-            <p>Bergabung dengan ratusan pebisnis lainnya yang telah mempercayakan pengiriman barangnya bersama WH CHINA by CECE.</p>
+            <p>Bergabung dengan ratusan pebisnis lainnya yang telah mempercayakan pengiriman barangnya bersama Warehouse.</p>
             <div class="cta-buttons">
                 <a href="{{ route('register') }}" class="btn-white">Daftar Sekarang — Gratis</a>
             </div>
@@ -312,12 +312,12 @@
     <footer class="landing-footer">
         <div class="landing-brand" style="font-size: 1.25rem;">
             <span style="width:10px;height:10px;background:var(--pink-deep);border-radius:50%;display:inline-block;"></span>
-            WH CHINA by CECE
+            Warehouse
         </div>
         <div style="display:flex; align-items:center; gap:1.5rem; flex-wrap:wrap; justify-content:center;">
             <a href="{{ route('tnc') }}" style="color:var(--ink-soft); text-decoration:none; font-size:0.85rem; font-weight:600; transition:color 0.2s;" onmouseover="this.style.color='var(--ink)';" onmouseout="this.style.color='var(--ink-soft)';">Syarat &amp; Ketentuan</a>
             <a href="{{ route('privacy') }}" style="color:var(--ink-soft); text-decoration:none; font-size:0.85rem; font-weight:600; transition:color 0.2s;" onmouseover="this.style.color='var(--ink)';" onmouseout="this.style.color='var(--ink-soft)';">Kebijakan Privasi</a>
-            <span style="color:var(--ink-soft); font-size:0.85rem;">&copy; {{ date('Y') }} WH CHINA by CECE. Hak Cipta Dilindungi.</span>
+            <span style="color:var(--ink-soft); font-size:0.85rem;">&copy; {{ date('Y') }} Warehouse. Hak Cipta Dilindungi.</span>
         </div>
     </footer>
 

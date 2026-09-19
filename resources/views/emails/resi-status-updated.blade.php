@@ -11,7 +11,7 @@
         
         {{-- Header --}}
         <div style="background: linear-gradient(135deg, #0f172a, #312e81); padding: 24px 20px; text-align: center; color: #ffffff;">
-            <div style="font-size: 20px; font-weight: 800; letter-spacing: -0.02em;">WH CE Cargo</div>
+            <div style="font-size: 20px; font-weight: 800; letter-spacing: -0.02em;">Warehouse Cargo</div>
             <div style="font-size: 13px; color: #cbd5e1; margin-top: 4px;">Notifikasi Status Paket &amp; Foto Gudang</div>
         </div>
 
@@ -95,7 +95,7 @@
 
         {{-- Footer --}}
         <div style="background: #f8fafc; padding: 16px; text-align: center; border-top: 1px solid #e2e8f0; font-size: 12px; color: #94a3b8;">
-            &copy; {{ date('Y') }} WH CE Cargo. All rights reserved.
+            &copy; {{ date('Y') }} Warehouse Cargo. All rights reserved.
         </div>
 
     </div>

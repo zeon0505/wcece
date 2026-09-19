@@ -13,7 +13,7 @@
             <span style="font-size:1.6rem;">‼️</span> Terms &amp; Conditions <span style="font-size:1.6rem;">‼️</span>
         </h1>
         <p style="color:var(--ink-soft); font-size:0.9rem; margin-top:0.4rem; max-width:560px; margin-left:auto; margin-right:auto; line-height:1.5;">
-            Harap baca dan pahami seluruh syarat &amp; ketentuan layanan WH CHINA by CECE di bawah ini sebelum menggunakan jasa pengiriman.
+            Harap baca dan pahami seluruh syarat &amp; ketentuan layanan Warehouse di bawah ini sebelum menggunakan jasa pengiriman.
         </p>
     </div>
 
@@ -30,7 +30,7 @@
                 ⚠️
             </div>
             <div style="font-size:0.85rem; color:#92400e; font-weight:700; line-height:1.45;">
-                Dilarang keras menyebarluaskan alamat WH. Wajib memahami seluruh Syarat &amp; Ketentuan sebelum menggunakan layanan WH CHINA by CECE.
+                Dilarang keras menyebarluaskan alamat WH. Wajib memahami seluruh Syarat &amp; Ketentuan sebelum menggunakan layanan Warehouse.
             </div>
         </div>
 

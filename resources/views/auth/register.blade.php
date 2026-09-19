@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Daftar — WH CHINA by CECE</title>
+    <title>Daftar — Warehouse</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <style>
         body { 
@@ -37,7 +37,7 @@
     <div class="auth-box">
         <div class="auth-logo">
             <span style="width:10px;height:10px;background:var(--blue-deep);border-radius:50%;display:inline-block;"></span>
-            WH CHINA by CECE
+            Warehouse
         </div>
         <div style="text-align: center; margin-bottom: 2rem;">
             <h1 style="font-size:1.5rem;font-weight:800;font-family:'Space Grotesk',sans-serif;margin-bottom:0.375rem;color:var(--ink);">Buat akun baru</h1>

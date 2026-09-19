@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Verifikasi Kode OTP — WH CHINA by CECE</title>
+    <title>Verifikasi Kode OTP — Warehouse</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <style>
         body { margin:0; min-height:100vh; display:flex; align-items:center; justify-content:center; position:relative; overflow:hidden; }
@@ -32,7 +32,7 @@
     <div class="auth-box">
         <div class="auth-logo">
             <span style="width:10px;height:10px;background:var(--blue-deep);border-radius:50%;display:inline-block;"></span>
-            WH CHINA by CECE
+            Warehouse
         </div>
 
         {{-- Step indicator --}}

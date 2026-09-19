@@ -20,7 +20,7 @@ class OtpPasswordMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: '🔐 Kode OTP Reset Password — WH CHINA by CECE',
+            subject: '🔐 Kode OTP Reset Password — Warehouse',
         );
     }
 
