@@ -94,7 +94,7 @@
 
         {{-- Resend Section with Countdown --}}
         <div style="margin-top:1.5rem; text-align:center;">
-            <div id="countdown-wrap" class="countdown">
+            <div id="countdown-wrap" class="countdown" data-sent-at="{{ session('otp_sent_at', now()->timestamp) }}">
                 Kirim ulang kode dalam <span id="timer">60</span> detik
             </div>
             <div id="resend-wrap" style="display:none;">
@@ -157,11 +157,10 @@
 
     // ── Countdown Timer ───────────────────────────────────────────────────────
     (function() {
-        // otp_sent_at from server (Unix timestamp in seconds)
-        const sentAt = {{ session('otp_sent_at', now()->timestamp) }};
+        const countdownWrap = document.getElementById('countdown-wrap');
+        const sentAt = parseInt(countdownWrap ? countdownWrap.dataset.sentAt : Math.floor(Date.now() / 1000)) || Math.floor(Date.now() / 1000);
         const COOLDOWN = 60; // seconds
         const timerEl = document.getElementById('timer');
-        const countdownWrap = document.getElementById('countdown-wrap');
         const resendWrap = document.getElementById('resend-wrap');
 
         function tick() {
